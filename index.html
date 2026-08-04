@@ -1,104 +1,216 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDH Media Gallery</title>
-    <!-- CSS & FontAwesome Icons -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Comp Calc - Quick Workflow Calculator for Visual Artists</title>
+    <meta name="description" content="Comp Calc is a free, browser-based calculator for visual artists. Use it online or download a local copy. No installation needed. Works on Windows, Mac, and Linux.">
+    <meta name="keywords" content="calculator for artists, art workflow calculator, composition calculator, aspect ratio calculator, color calculator, free web tool, browser calculator">
+    <meta property="og:title" content="Comp Calc - Quick Workflow Calculator for Visual Artists">
+    <meta property="og:description" content="A simple, fast, and free calculator for visual artists. No install. Just open and calculate.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/abashed-backbencher55/comp-calc-browser-tools">
+    <meta name="twitter:card" content="summary">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.7;
+            color: #2d3748;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 20px 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .top-badge {
+            display: inline-block;
+            background: #2b6cb0;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+            transition: transform 0.2s;
+        }
+        .top-badge:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        .top-badge span {
+            background: white;
+            color: #2b6cb0;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #276749;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(39, 103, 73, 0.3);
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #22543d;
+            text-decoration: none;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #276749;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .use-cases {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3182ce;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th {
+            background: #edf2f7;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .step-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .step-list li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        ol.step-list li::marker {
+            color: #3182ce;
+            font-weight: bold;
+        }
+        .warning-box {
+            background: #fefcbf;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-left: 4px solid #d69e2e;
+        }
+        .keywords-section {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .top-badge {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
 </head>
-<body class="dark-mode">
-
-    <!-- Navbar / Header Section -->
-    <header class="navbar">
-        <div class="logo-area">
-            <img src="sazedul2029.png" alt="SDH Logo" class="profile-logo">
-            <div class="brand-info">
-                <h1>SDH Media Gallery</h1>
-                <p>All-in-One Digital Asset Hub</p>
-            </div>
-        </div>
-
-        <div class="header-tools">
-            <!-- Feature 1: Dark/Light Mode Toggle -->
-            <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
-                <i class="fa-solid fa-sun"></i>
-            </button>
-        </div>
-    </header>
-
-    <div class="main-container">
-        <!-- Search & Category Filters Bar -->
-        <section class="top-controls">
-            <!-- Feature 2: Real-time Search Bar -->
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" placeholder="Search media files, titles, tags...">
-            </div>
-
-            <!-- Feature 3: Category Filtering -->
-            <div class="filter-group">
-                <button class="filter-btn active" data-category="all">All Media</button>
-                <button class="filter-btn" data-category="photo"><i class="fa-solid fa-image"></i> Photos</button>
-                <button class="filter-btn" data-category="video"><i class="fa-solid fa-video"></i> Videos</button>
-                <!-- Feature 4: Favorites Filter -->
-                <button class="filter-btn" data-category="favorites"><i class="fa-solid fa-heart"></i> Favorites</button>
-            </div>
-        </section>
-
-        <!-- Media Upload Box -->
-        <section class="upload-section">
-            <div class="card-header">
-                <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload New Media</h3>
-            </div>
-            <form id="upload-form" class="upload-form">
-                <div class="input-field">
-                    <input type="text" id="media-title" placeholder="Enter title or description..." required>
-                </div>
-                <div class="input-field">
-                    <select id="media-category" required>
-                        <option value="photo">Photo / Image</option>
-                        <option value="video">Video File</option>
-                    </select>
-                </div>
-                <div class="input-field file-input-wrapper">
-                    <input type="file" id="media-file" accept="image/*,video/*" required>
-                </div>
-                <button type="submit" class="submit-btn"><i class="fa-solid fa-upload"></i> Upload & Save</button>
-            </form>
-        </section>
-
-        <!-- Dynamic Media Gallery Grid -->
-        <section class="gallery-wrapper">
-            <div class="section-title">
-                <h2><i class="fa-solid fa-photo-film"></i> Media Assets</h2>
-            </div>
-            
-            <div id="media-grid" class="gallery-grid">
-                <!-- Javascript will load items dynamically here -->
-            </div>
-        </section>
-    </div>
-
-    <!-- Feature 5: Lightbox Fullscreen Modal -->
-    <div id="lightbox-modal" class="lightbox">
-        <span class="close-lightbox">&times;</span>
-        <div class="lightbox-body">
-            <div id="lightbox-media-container"></div>
-            <div class="lightbox-caption">
-                <p id="lightbox-caption-text"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 SDH Media Gallery | Designed with Care</p>
-    </footer>
-
-    <!-- JS Script Connection -->
-    <script src="script.js"></script>
-</body>
-</html>
+<body>
+    <div class="container">
+        <h1>🧮 Comp-Calc-Browser-Tools – Calculator for Practical Artists</h1>
+        
+        <p>Do you spend time switching between art tools and messy spreadsheets? Comp Calc fixes that. It does one job well – it gives you fast answers for common art and design math. No more guessing. No more phone calculator hunts.</p>
+        
+        <a href="https://github.com/abashed-backbencher55/comp-calc-browser-tools" class="top-badge" target="_blank" rel="noopener">Download Comp Calc Now <span>Free</span></a>
+        
+        <h2>🎯 What This Tool Does</h2>
+        <p>Comp Calc is a web page that works like a calculator. You open it, pick a calculation type, type in your numbers, and get an answer instantly. It's built for visual artists – painters, photographers, designers, and illustrators.</p>
+        <p>This is not a full software program. It's much simpler. It's a single HTML file. Your browser runs it. You don't install anything. You don't register for anything. You open the file, and it works.</p>
+        
+        <h3>Why artists need it</h3>
+        <p>When you work with images, you constantly deal with numbers – aspect ratios, print sizes, color values, viewing distances. Doing this math by hand is slow. Using a generic calculator is also slow because you must remember formulas. Comp Calc puts the right formula right in front of you.</p>
+        
+        <h2>🛠️ Core Features</h2>
+        <ul class="feature-list">
+            <li><strong>Aspect Ratio Calculator</strong> – Input a width and height. Get the aspect ratio (like 16:9 or 4:3) immediately.</li>
+            <li><strong>Print Size Resolver</strong> – Need to print an image at a certain DPI? Type in the pixel dimensions and the DPI. Get
